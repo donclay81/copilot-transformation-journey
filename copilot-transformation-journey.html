@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microsoft Copilot Practice Transformation Journey</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #0078D4;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-x: auto;
+        }
+
+        .journey-container {
+            background: white;
+            border-radius: 20px;
+            padding: 60px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            max-width: 1600px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .microsoft-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #0078D4;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .main-title {
+            font-size: 3rem;
+            color: #323130;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #605E5C;
+            margin-bottom: 30px;
+        }
+
+        .transformation-path {
+            position: relative;
+            margin: 80px 0;
+            padding: 40px 0;
+        }
+
+        .path-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, #0078D4 0%, #40E0D0 50%, #00BCF2 100%);
+            transform: translateY(-50%);
+            border-radius: 4px;
+            z-index: 1;
+        }
+
+        .stages {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stage {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 3px solid #E1DFDD;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .stage:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-color: #0078D4;
+        }
+
+        .stage-number {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            background: white;
+            border: 4px solid #0078D4;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #0078D4;
+        }
+
+        .stage-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #0078D4, #00BCF2);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+        }
+
+        .stage-title {
+            font-size: 1.3rem;
+            color: #323130;
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .stage-timeline {
+            text-align: center;
+            color: #0078D4;
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .stage-items {
+            list-style: none;
+        }
+
+        .stage-items li {
+            padding: 8px 0;
+            color: #605E5C;
+            position: relative;
+            padding-left: 25px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .stage-items li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #107C10;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .key-metrics {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin: 60px 0;
+        }
+
+        .metric {
+            background: linear-gradient(135deg, #F8F9FA, #E1DFDD);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            border: 2px solid #E1DFDD;
+            transition: all 0.3s ease;
+        }
+
+        .metric:hover {
+            transform: translateY(-5px);
+            border-color: #0078D4;
+        }
+
+        .metric-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #0078D4;
+            margin-bottom: 8px;
+        }
+
+        .metric-label {
+            color: #605E5C;
+            font-size: 0.95rem;
+        }
+
+        .success-factors {
+            background: linear-gradient(135deg, #0078D4, #005A9E);
+            color: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 60px;
+        }
+
+        .success-title {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .factors-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .factor {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+
+        .factor-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .factor-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .factor-desc {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        .certification-path {
+            background: #F8F9FA;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+
+        .cert-title {
+            font-size: 1.8rem;
+            color: #323130;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .cert-tracks {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .cert-track {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            border: 2px solid #E1DFDD;
+        }
+
+        .track-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .track-icon {
+            width: 50px;
+            height: 50px;
+            background: #0078D4;
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+
+        .track-name {
+            font-size: 1.3rem;
+            color: #323130;
+            font-weight: 600;
+        }
+
+        .cert-list {
+            list-style: none;
+        }
+
+        .cert-list li {
+            padding: 10px;
+            margin: 8px 0;
+            background: #F8F9FA;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            font-size: 0.95rem;
+        }
+
+        .cert-badge {
+            background: #107C10;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-left: auto;
+        }
+
+        @media (max-width: 1200px) {
+            .stages {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .key-metrics {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .factors-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .stages {
+                grid-template-columns: 1fr;
+            }
+            
+            .cert-tracks {
+                grid-template-columns: 1fr;
+            }
+            
+            .journey-container {
+                padding: 30px;
+            }
+            
+            .main-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="journey-container">
+        <div class="microsoft-badge">Microsoft Partner</div>
+        
+        <div class="header">
+            <h1 class="main-title">Copilot Practice Transformation Journey</h1>
+            <p class="subtitle">From Traditional Consulting to AI-Powered Solutions Leadership</p>
+        </div>
+
+        <div class="transformation-path">
+            <div class="path-line"></div>
+            <div class="stages">
+                <div class="stage">
+                    <div class="stage-number">1</div>
+                    <div class="stage-icon">🏗️</div>
+                    <h3 class="stage-title">Foundation Building</h3>
+                    <p class="stage-timeline">Months 1-2</p>
+                    <ul class="stage-items">
+                        <li>Complete Copilot Jumpstart Program</li>
+                        <li>Achieve Copilot Ready Tier</li>
+                        <li>Skills assessment for all consultants</li>
+                        <li>Launch AI training programs</li>
+                        <li>Establish development environments</li>
+                        <li>Identify pilot customers</li>
+                    </ul>
+                </div>
+
+                <div class="stage">
+                    <div class="stage-number">2</div>
+                    <div class="stage-icon">🎓</div>
+                    <h3 class="stage-title">Capability Development</h3>
+                    <p class="stage-timeline">Months 3-4</p>
+                    <ul class="stage-items">
+                        <li>Intensive certification programs</li>
+                        <li>Copilot Studio mastery</li>
+                        <li>Azure OpenAI integration skills</li>
+                        <li>First customer implementations</li>
+                        <li>Build solution accelerators</li>
+                        <li>Develop industry templates</li>
+                    </ul>
+                </div>
+
+                <div class="stage">
+                    <div class="stage-number">3</div>
+                    <div class="stage-icon">🚀</div>
+                    <h3 class="stage-title">Market Expansion</h3>
+                    <p class="stage-timeline">Months 5-6</p>
+                    <ul class="stage-items">
+                        <li>Launch industry solutions</li>
+                        <li>Scale customer deployments</li>
+                        <li>Achieve specializations</li>
+                        <li>Establish thought leadership</li>
+                        <li>Build reference customers</li>
+                        <li>Expand partner ecosystem</li>
+                    </ul>
+                </div>
+
+                <div class="stage">
+                    <div class="stage-number">4</div>
+                    <div class="stage-icon">🏆</div>
+                    <h3 class="stage-title">Market Leadership</h3>
+                    <p class="stage-timeline">Months 7+</p>
+                    <ul class="stage-items">
+                        <li>Regional AI practice leader</li>
+                        <li>Innovation lab established</li>
+                        <li>Strategic partnerships</li>
+                        <li>IP development program</li>
+                        <li>International expansion</li>
+                        <li>Partner of the Year candidate</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="key-metrics">
+            <div class="metric">
+                <div class="metric-icon">👥</div>
+                <div class="metric-value">18+</div>
+                <div class="metric-label">Team Members Enhanced</div>
+            </div>
+            <div class="metric">
+                <div class="metric-icon">🎯</div>
+                <div class="metric-value">25+</div>
+                <div class="metric-label">Certifications Required</div>
+            </div>
+            <div class="metric">
+                <div class="metric-icon">⏱️</div>
+                <div class="metric-value">6</div>
+                <div class="metric-label">Months to Competency</div>
+            </div>
+            <div class="metric">
+                <div class="metric-icon">📈</div>
+                <div class="metric-value">30%</div>
+                <div class="metric-label">Revenue Target from AI</div>
+            </div>
+        </div>
+
+        <div class="certification-path">
+            <h2 class="cert-title">Certification Pathways by Role</h2>
+            <div class="cert-tracks">
+                <div class="cert-track">
+                    <div class="track-header">
+                        <div class="track-icon">⚡</div>
+                        <h3 class="track-name">Technical Track</h3>
+                    </div>
+                    <ul class="cert-list">
+                        <li>AI-102: Azure AI Engineer Associate <span class="cert-badge">PRIORITY</span></li>
+                        <li>PL-600: Power Platform Solution Architect <span class="cert-badge">PRIORITY</span></li>
+                        <li>Applied Skills: Copilot Development</li>
+                        <li>Azure OpenAI Service Certification</li>
+                        <li>Document Intelligence Specialist</li>
+                    </ul>
+                </div>
+                
+                <div class="cert-track">
+                    <div class="track-header">
+                        <div class="track-icon">💼</div>
+                        <h3 class="track-name">Business Track</h3>
+                    </div>
+                    <ul class="cert-list">
+                        <li>Copilot for Sales Configuration <span class="cert-badge">PRIORITY</span></li>
+                        <li>AI-900: Azure AI Fundamentals</li>
+                        <li>Dynamics 365 + AI Integration</li>
+                        <li>Industry Solution Specialization</li>
+                        <li>Customer Success Management</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="success-factors">
+            <h2 class="success-title">Critical Success Factors</h2>
+            <div class="factors-grid">
+                <div class="factor">
+                    <div class="factor-icon">🎯</div>
+                    <h3 class="factor-title">Leadership Commitment</h3>
+                    <p class="factor-desc">Executive sponsorship and dedicated project leadership ensuring transformation success</p>
+                </div>
+                <div class="factor">
+                    <div class="factor-icon">📚</div>
+                    <h3 class="factor-title">Continuous Learning</h3>
+                    <p class="factor-desc">Mandatory certification completion and ongoing skills development for all team members</p>
+                </div>
+                <div class="factor">
+                    <div class="factor-icon">🤝</div>
+                    <h3 class="factor-title">Customer Focus</h3>
+                    <p class="factor-desc">Pilot implementations with existing customers to build expertise and references</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
